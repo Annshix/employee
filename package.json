@@ -22,9 +22,13 @@
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
     "kerberos": "0.0.21",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "rc": "1.0.1",
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9",
+    "sails-hook-autoreload": "^0.13.2",
+    "sails-hook-pagify": "^0.2.0",
     "sails-mongo": "^0.12.0"
   },
   "scripts": {
