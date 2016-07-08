@@ -1,0 +1,32 @@
+<!doctype html>
+<html class="no-js fixed-layout">
+
+<head>
+  <title>员工信息</title>
+  <% include ../head/default.ejs %>
+</head>
+
+<body>
+
+<% include ../header/default.ejs %>
+
+<div class="am-cf admin-main">
+
+  <% include ../sidebar/default.ejs %>
+
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">员工信息</strong> | <small><a href="/user/edit?id=<%= user.id %>"> 编辑 <i class="am-icon-gear am-icon-spin"></i></a></small> |<small><a href="/dashboard"> 回到主页 <i class="am-icon-home"></i></a></small></div>
+      </div>
+      <% include component/info-table.ejs %>
+    </div>
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left">© 2016.07 BaiXing. YiZhe, ZhengXian, XuanBao.</p>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

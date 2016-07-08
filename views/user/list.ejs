@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js fixed-layout">
+
+<head>
+  <title>个人主页</title>
+  <% include ../head/default.ejs %>
+</head>
+
+<body>
+
+<% include ../header/default.ejs %>
+
+<div class="am-cf admin-main">
+  <% include ../sidebar/default.ejs %>
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">搜索员工</strong> |
+          <small><a href="info_personnal.html"> 我的资料 <i class="am-icon-gear am-icon-spin"></i></a></small>
+          |
+          <small><a href="admin-index.html"> 回到主页 <i class="am-icon-home"></i></a></small>
+        </div>
+      </div>
+      <div class="am-cf am-padding">
+        <table class="am-table am-table-bd am-table-striped admin-content-table">
+          <thead>
+          <tr>
+            <th>名字</th>
+            <th>Email</th>
+            <th>手机</th>
+            <th>部门</th>
+            <th>职位</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% data.forEach(function (user) { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.phone %></td>
+            <td><%= user.department1 %></td>
+            <td><%= user.positionName %></td>
+            <td><a class="am-btn am-btn-default am-btn-xs" href="/user/detail?id=<%= user.id %>">查看</a></td>
+          </tr>
+          <% }) %>
+          </tbody>
+        </table>
+        <% include ../pagination/default.ejs %>
+      </div>
+    </div>
+
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left">© 2016.07 BaiXing. YiZhe, ZhengXian, ShiXuan.</p>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

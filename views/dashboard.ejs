@@ -1,1 +1,87 @@
-this is a dashboard!
+<!doctype html>
+<html class="no-js fixed-layout">
+
+<head>
+  <title>员工信息平台</title>
+  <% include head/default.ejs %>
+</head>
+
+<body>
+
+<% include header/default.ejs %>
+
+<div class="am-cf admin-main">
+  <% include sidebar/default.ejs %>
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> /
+          <small>操作</small>
+        </div>
+      </div>
+
+      <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+        <li><a href="/user/me" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>个人资料</a>
+        </li>
+        <li><a href="/user/list" class="am-text-success"><span class="am-icon-btn am-icon-user-md"></span><br/>员工列表</a>
+        </li>
+        <!--<li><a href="edit.html" class="am-text-warning"><span class="am-icon-btn am-icon-user-md"></span><br/>编辑资料</a></li>-->
+        <li><a href="new.html" class="am-text-danger"><span class="am-icon-btn am-icon-user-md"></span><br/>新增员工</a>
+        </li>
+      </ul>
+
+      <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">新员工一览～</strong></div>
+      </div>
+
+      <div class="am-g">
+        <div class="am-u-sm-12">
+          <table class="am-table am-table-bd am-table-striped admin-content-table">
+            <thead>
+            <tr>
+              <th>名字</th>
+              <th>Email</th>
+              <th>手机</th>
+              <th>部门</th>
+              <th>职位</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% users.forEach(function (user) { %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.phone %></td>
+              <td><%= user.department1 %></td>
+              <td><%= user.positionName %></td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs" href="/user/detail?id=<%= user.id %>">查看</a>
+                    <a class="am-btn am-btn-default am-btn-xs" href="/user/edit?id=<%= user.id %>">编辑</a>
+                    <a class="am-btn am-btn-default am-btn-xs" href="/user/delete?id=<%= user.id %>">删除</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="admin-content-footer">
+    <hr>
+    <p class="am-padding-left">© 2016.07 BaiXing. YiZhe, ZhengXian, XuanBao.</p>
+  </footer>
+</div>
+<!-- content end -->
+
+</body>
+</html>
