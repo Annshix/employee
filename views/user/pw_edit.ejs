@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>修改密码</title>
+  <% include ../head/default.ejs %>
+</head>
+
+<body>
+<% include ../header/default.ejs %>
+<div class="am-cf admin-main">
+
+<% include ../sidebar/default.ejs %>
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">修改资料</strong> |
+          <small><a href="/dashboard"> 回到主页 <i class="am-icon-home"></i></a></small>
+        </div>
+      </div>
+      <hr>
+      <div class="am-margin" style="max-width: 600px;">
+        <input type="hidden" id="userId" value="<%=user.id%>" />
+        <form action="/user/change_PassWord" method="post" class="am-form" id="edit-password">
+          <fieldset>
+
+          <div class="am-form-group">
+            <label for="init_password">原密码：</label>
+            <input type="text" name="init-password" id="init-password" placeholder="" data-validation-message="请输入原始密码" value="<%= user.password %>" required/>
+          </div>
+
+          <div class="am-form-group">
+            <label for="new_password">新密码：</label>
+            <input type="text" name="new_password" id="new_password" placeholder="" data-validation-message="请输入新密码" value="<%= user.password %>" required/>
+          </div>
+            <button class="am-btn am-btn-primary am-btn-xs" type="submit">确认修改</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="success">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">修改成功
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-cancel>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+    </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="fail">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">修改失败
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+    </div>
+  </div>
+</div>
+
+<script type = "text/javascript">
+  $(function () {
+    $('form').submit(function (event) {
+      event.preventDefault()
+    })
+    $('#edit-password').validator({
+      validate: function(validity){
+        return validity
+      },
+      onvalid: function (validity){
+        $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+      },
+      onInValid: function(validity){
+        var $field = $(validity.field);
+        var $group = $field.closest('.am-form-group');
+        var $alert = $group.find('.am-alert');
+        var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+        if(!$alert.length){
+          $alert = $('<div class = "am-alert am-alert-danger"></div>').hide().appendTo($group);
+        }
+        $alert.html(msg).show();
+      },
+      submit: function() {
+        var formaValidity = this.isFormValid();
+        $.when(formValidity).then(function () {
+          $.ajax({
+            type: $('#edit-password').attr('method'),
+            url: $('#edit-password').attr('action'),
+            data: $('#edit-password').serial(),
+            dataType: 'json',
+            encode: true
+          }).success(function (data) {
+            $('#success').modal({
+              relatedTarget: this,
+              onCancel: function (e) {
+                window.location.href = '/user/pw_edit'
+              }
+            })
+          }).fail(function (data) {
+            $('#fail').modal()
+          })
+        }, function () {
+        });
+      }
+    });
+  });
+  </script>
+</body>
+</html>
