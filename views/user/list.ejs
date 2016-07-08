@@ -18,11 +18,20 @@
     <div class="admin-content-body">
       <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">搜索员工</strong> |
-          <small><a href="info_personnal.html"> 我的资料 <i class="am-icon-gear am-icon-spin"></i></a></small>
+          <small><a href="/user/me"> 我的资料 <i class="am-icon-gear am-icon-spin"></i></a></small>
           |
-          <small><a href="admin-index.html"> 回到主页 <i class="am-icon-home"></i></a></small>
+          <small><a href="/dashboard"> 回到主页 <i class="am-icon-home"></i></a></small>
         </div>
       </div>
+
+      <div class="am-cf am-padding">
+        <div class = "am-form-group">
+          <label for = "name">请输入姓名</label>
+          <input type="text" name="name" id="name" placeholder="" />
+          <button id = "search" class="am-btn am-btn-primary am-btn-xs" type="submit">搜索</button>
+        </div>
+      </div>
+
       <div class="am-cf am-padding">
         <table class="am-table am-table-bd am-table-striped admin-content-table">
           <thead>
@@ -58,5 +67,28 @@
     </footer>
   </div>
 </div>
+
+<script type = "text/javascript">
+  $('#search').click(function(){
+    event.preventDefault();
+    var name = $('#name').val();
+
+    .$ajax({
+      dataType: json,
+      url: "/user/list",
+      data:{name: name},
+      encode: true,
+    }).success(function(data){
+      $('#success').modal({
+        relatedTarget: this,
+        onCancel: function(e){
+          window.location.href='/user/list'
+        }
+      })
+    }).fail(function(data){
+      $('#fail').modal()
+    })
+  })
+</script>
 </body>
 </html>

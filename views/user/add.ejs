@@ -55,11 +55,22 @@
 
             <div class="am-form-group">
               <label for="department1">一级部门：</label>
-              <input type="text" name="department1" id="department1" placeholder="" />
+              <select name="department1" id="department1" data-am-selected = "{searchBox: 1}">
+                <option value = "a"> abc.baixing </option>
+                <option value = "乐"> 乐空空 </option>
+                <option value = "手"> 手机客户端 </option>
+                <option value = "网"> 网站 </option>
+              </select>
             </div>
+
             <div class="am-form-group">
               <label for="department2">二级部门：</label>
-              <input type="text" name="department2" id="department2" placeholder="" />
+              <select name="department2" id="department2" data-am-selected = "{searchBox: 1}">
+                <option value = "前"> 前端 </option>
+                <option value = "后"> 后端 </option>
+                <option value = "营"> 营收 </option>
+                <option value = "架"> 架构 </option>
+              </select>
             </div>
             <div class="am-form-group">
               <label for="positionName">岗位名称：</label>
